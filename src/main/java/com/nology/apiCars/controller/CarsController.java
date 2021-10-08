@@ -2,7 +2,7 @@ package com.nology.apiCars.controller;
 
 import com.nology.apiCars.entity.Car;
 import com.nology.apiCars.repository.CarRepository;
-import com.nology.apiCars.utilities.Message;
+import com.nology.apiCars.entity.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +11,9 @@ import java.util.List;
 
 @RestController
 public class CarsController {
-    // Final is similar to const in JS in that you cannot change the value of the variable
     private final CarRepository repository = new CarRepository();
 
-    // CREATE an individual car
+    // CREATE a car
     @PostMapping("/cars")
     public ResponseEntity<Message> createCar(@RequestBody Car newCar) {
         try {
@@ -42,7 +41,7 @@ public class CarsController {
                 .body(repository.getCarsPortfolio());
     }
 
-    // READ an individual car based on an id
+    // READ a car based on an id
     @GetMapping("/cars/{id}")
     public ResponseEntity<String> displayIndividualCar(@PathVariable int id) {
         String carInfo = "";
@@ -60,7 +59,7 @@ public class CarsController {
         return ResponseEntity.status(HttpStatus.OK).body(carInfo);
     }
 
-    // UPDATE an individual car based on an id
+    // UPDATE a car based on an id
     @PutMapping("cars/{id}")
     public ResponseEntity<Message> updateIndividualCar(@PathVariable int id, @RequestBody Car amendCar) {
         try {
@@ -78,12 +77,12 @@ public class CarsController {
             }
             throw new Exception();
         } catch (Exception e) {
-            Message unsuccessfulMessage = new Message("Successfully updated car");
+            Message unsuccessfulMessage = new Message("Incorrect id, please try again");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(unsuccessfulMessage);
         }
     }
 
-    // DELETE an individual car based on an id
+    // DELETE a car based on an id
     @DeleteMapping("/cars/{id}")
     public ResponseEntity<Message> deleteIndividualCar(@PathVariable int id) {
         try {

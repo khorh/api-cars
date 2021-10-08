@@ -1,4 +1,4 @@
-package com.nology.apiCars.utilities;
+package com.nology.apiCars.entity;
 
 public class Message {
     private final String text;
